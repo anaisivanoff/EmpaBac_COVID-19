@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImpaBac</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Impact du COVID-19 sur le Bac</h1>
+    <p>Comparaison des taux de réussite avant et après la pandémie.</p>
+    
+    <canvas id="bacChart"></canvas>
+    <p> Avant le Covid, le taux de réussite au bac était relativement stable, autour de 85-88%.
+        En 2020, il a brutalement augmenté pour dépasser les 95%, principalement en raison du passage au contrôle continu.
+        Après la pandémie, les taux sont redescendus progressivement, mais restent légèrement supérieurs à ceux d’avant la crise.</p>
+    <canvas id="secondChart"></canvas> 
+    <p> Avant le Covid, le bac général avait un taux de réussite élevé (>90%), tandis que le bac techno et pro affichaient des taux plus bas (75-85% et 65-70%).
+        Pendant la crise, le contrôle continu a bénéficié à toutes les filières, entraînant une augmentation du taux de réussite, notamment pour le bac pro.
+        Après le Covid, le bac général a conservé un bon niveau, mais le bac techno et pro ont retrouvé des taux plus proches de ceux d’avant.</p>
+    <canvas id="thirdChart"></canvas> 
+    <p> Avant 2020, environ 50% des candidats obtenaient une mention, avec une répartition équilibrée.
+        En 2020, le nombre de mentions a explosé, atteignant plus de 66%, sous l’effet de la suppression des épreuves finales.
+        Depuis 2022, la tendance revient à des niveaux plus normaux, mais les mentions restent plus fréquentes qu’avant la crise.</p>
+
+    <script src="script.js"></script>
+</body>
+</html>
