@@ -169,3 +169,13 @@ const config1 = {
         }
     }
 };
+document.addEventListener("DOMContentLoaded", function() {
+    const statistiquesSection = document.getElementById("statistiques");
+    const statistiquesLink = document.getElementById("statistiques-link");
+    
+    statistiquesLink.addEventListener("click", function(event) {
+        event.preventDefault();
+        statistiquesSection.style.display = "block";
+        statistiquesSection.scrollIntoView({ behavior: "smooth" });
+    });
+});
