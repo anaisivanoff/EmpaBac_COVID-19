@@ -15,6 +15,7 @@ const puppeteer = require('puppeteer');
   const title = await page.evaluate(() => {
     return document.querySelector('body').innerText;
   });
+  
   console.log("L'étudiant :", title);
   // 5. Fermer le navigateur
   await browser.close();
