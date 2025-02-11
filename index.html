@@ -1,49 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echo Bac</title>
+    <title>Impact du COVID-19 sur le Bac</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>L'impact du COVID-19 sur le Bac</h1>
-    <p>Comparaison avant, pendant et après la pandemie. </p>
+    <h1>Impact du COVID-19 sur le Bac</h1>
+    <p>Comparaison des taux de réussite avant et après la pandémie.</p>
+    
     <canvas id="bacChart"></canvas>
-</body>
-<script>
-    const data = {
-        labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
-        datasets: [{
-            label:'Taux de réussite (%)',
-            data: [65, 59, 80, 81, 26, 55, 40],
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)'
-        }]
-    };
-    const config ={
-        type: 'line',
-        data: data,
-        options: {
-            animations:{
-                tension: {
-                    duration: 1000,
-                    easing: 'linear',
-                    from: 1,
-                    to: 0,
-                    loop: true
+    
+    <script>
+        const data = {
+            labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+            datasets: [
+                {
+                    label: 'Taux de réussite général (%)',
+                    data: [88, 89, 78, 96, 91,98,78],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                },
+                {
+                    label: 'Taux de mention Bien (%)',
+                    data: [25, 26, 40, 42, 35, 22, 78],
+                    fill: false,
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.1
+                },
+                {
+                    label: 'Taux de mention Très Bien (%)',
+                    data: [10, 12, 19, 27, 20,45,78],
+                    fill: false,
+                    borderColor: 'rgb(54, 162, 235)',
+                    tension: 0.1
                 }
-            },
-            scales: {
-                y: {
-                    min: 0,
-                    max: 100
+            ]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                animations: {
+                    tension: {
+                        duration: 1000,
+                        easing: 'linear',
+                        from: 1,
+                        to: 0,
+                        loop: true
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 100
+                    }
                 }
             }
-        }
-    }
-    const ctx = document.getElementById('bacChart').getContext('2d');
-    new Chart(ctx, config);
-</script>
+        };
+
+        const ctx = document.getElementById('bacChart').getContext('2d');
+        new Chart(ctx, config);
+    </script>
+</body>
 </html>
