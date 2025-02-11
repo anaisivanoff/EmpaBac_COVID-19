@@ -145,3 +145,27 @@ const config3 = {
 };
 const ctx3 = document.getElementById('thirdChart').getContext('2d');
 new Chart(ctx3, config3);
+
+const config1 = {
+    type: 'line',
+    data: data,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100
+            }
+        }
+    }
+};
