@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
   const page = await browser.newPage();
 
   // 2. Aller sur le site cible
-  await page.goto('https://etudiant.lefigaro.fr/article/bac-2023-taux-de-reussite-a-90-9-apres-le-rattrapage-en-baisse-de-0-2-point-par-rapport-a-2022_55d02e82-1d9e-11ee-8478-436437f3664a/'); // Remplace par ton URL
+  await page.goto('https://etudiant.lefigaro.fr/article/bac-2022-un-taux-de-reussite-en-baisse_f4cd52d6-ff99-11ec-9d0f-12f873f0defe/'); // Remplace par ton URL
 
   // 3. Attendre que la page soit chargée complètement
   await page.waitForSelector('html'); // Attendre l'élément principal
