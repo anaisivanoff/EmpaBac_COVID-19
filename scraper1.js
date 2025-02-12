@@ -9,9 +9,9 @@ const puppeteer = require('puppeteer');
   await page.waitForSelector('div'); // Attendre l'élément principal
   // 4. Extraire du texte de la page
   const title = await page.evaluate(() => {
-    return document.querySelector('body').innerText;
+    return document.querySelector('p').innerText;
   });
-  console.log("Direction de l'évaluation, de la prospective et de la performance :", title);
+  console.log("Avec 767 600 candidats et 677 300 bacheliers, le taux de réussite atteint 88,2 % à la session 2018 : 91,0 % en général, 88,8 % en technologique et 82,8 % en professionnel. :", title);
   // 5. Fermer le navigateur
   +
   await browser.close();
