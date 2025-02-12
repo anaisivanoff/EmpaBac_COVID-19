@@ -21,7 +21,6 @@ const fs = require('fs'); // Module pour écrire dans un fichier
     }
     return null; // Si le texte n'est pas trouvé
   });
-<<<<<<< HEAD
   // 5. Vérifier si le texte a été trouvé et sauvegarder
   if (specificText) {
     const data = {
@@ -30,16 +29,11 @@ const fs = require('fs'); // Module pour écrire dans un fichier
       extractedAt: new Date().toISOString()
     };
     // Sauvegarde des données dans un fichier JSON
-    fs.writeFileSync('data1.json', JSON.stringify(data, null, 2), 'utf-8');
+    fs.writeFileSync('data2.json', JSON.stringify(data, null, 2), 'utf-8');
     console.log("Les données ont été sauvegardées dans 'data1.json'");
   } else {
     console.log("Le texte spécifique n'a pas été trouvé.");
   }
   // 6. Fermer le navigateur
-=======
-  console.log("Taux de réussite au bac :évolution, résultats, mentions :", title);
-  // 5. Fermer le navigateur
-  
->>>>>>> 7766fdf551702d6388b29ecb8cff9c92888693f2
   await browser.close();
 })();
