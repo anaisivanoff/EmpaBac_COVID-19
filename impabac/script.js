@@ -161,16 +161,15 @@ const config1 = {
     }
 };
 document.addEventListener("DOMContentLoaded", function() {
-    const statistiquesSection = document.getElementById("statistiques");
-    const statistiquesLink = document.getElementById("statistiques-link");
-    
-    statistiquesLink.addEventListener("click", function(event) {
-        event.preventDefault();
-        statistiquesSection.style.display = "block";
-        statistiquesSection.scrollIntoView({ behavior: "smooth" });
-    });
-});
-document.addEventListener("DOMContentLoaded", function() {
     document.body.classList.add("loaded");
 });
+document.addEventListener("DOMContentLoaded", function() {
+    const btnStatistiques = document.getElementById("btn-statistiques");
+    if (btnStatistiques) {
+        btnStatistiques.addEventListener("click", function() {
+            window.location.href = "statistique.html";
+        });
+    }
+});
+
 

@@ -75,4 +75,37 @@ body {
 body.loaded {
     opacity: 1;
 }
+#btn-statistiques {
+    background-color: #333;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+#btn-statistiques:hover {
+    background-color: #555;
+}
+#btn-documentation {
+    background-color: #555;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+#btn-documentation:hover {
+    background-color: #333;
+}
+
 
