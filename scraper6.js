@@ -1,21 +1,24 @@
 const puppeteer = require('puppeteer');
+const fs = require('fs');
 
 (async () => {
-  // 1. Lancer le navigateur
-  const browser = await puppeteer.launch({ headless: true }); // "false" pour voir le navigateur s'ouvrir
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
+  await page.goto('https://www.studyrama.com/revision-examen/bac/premiers-chiffres-resultats-bac-2023');
 
-  // 2. Aller sur le site cible
-  await page.goto('https://etudiant.lefigaro.fr/article/bac-2023-taux-de-reussite-a-90-9-apres-le-rattrapage-en-baisse-de-0-2-point-par-rapport-a-2022_55d02e82-1d9e-11ee-8478-436437f3664a/'); // Remplace par ton URL
-
-  // 3. Attendre que la page soit chargée complètement
-  await page.waitForSelector('html'); // Attendre l'élément principal
-
-  // 4. Extraire du texte de la page
-  const title = await page.evaluate(() => {
-    return document.querySelector('body').innerText;
+  const data = await page.evaluate(() => {
+    const extractedText = "739 500 candidats (comprenant des candidats issus des formations agricoles) se sont présentés à la session de juin 2023. Au total, 672 400 candidats ont été reçus, soit 8 000 de plus qu’à la session de juin 2022. Le taux de réussite atteint 90,9 %. Il est en baisse de 0,2 point par rapport à celui de la session de juin 2022. Le taux de réussite au baccalauréat général est de 95,7 %, en baisse de 0,4 point par rapport à celui de la session de juin 2022. Le taux de réussite au baccalauréat technologique est de 89,8 %, en baisse de 0,8 point par rapport à la session de juin 2022. Le taux de réussite au baccalauréat professionnel atteint 82,7 %, soit 0,3 point de plus qu’à la session 2022.";
+    return extractedText;
   });
-  console.log("L'étudiant :", title);
-  // 5. Fermer le navigateur
+
+  const jsonData = {
+    extractedText: data,
+    url: 'https://www.studyrama.com/revision-examen/bac/premiers-chiffres-resultats-bac-2023',
+    extractedAt: new Date().toISOString()
+  };
+
+  fs.writeFileSync('data7.json', JSON.stringify(jsonData, null, 2), 'utf-8');
+  console.log('Data saved to data7.json');
+
   await browser.close();
 })();
