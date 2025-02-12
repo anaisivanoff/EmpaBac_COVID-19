@@ -41,7 +41,7 @@ nav ul li a {
     margin: auto;
     background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(250,244,149);
+    box-shadow: 0 4px 8px rgb(52, 51, 49);
     margin-bottom: 40px;
 }
 
@@ -52,7 +52,7 @@ nav ul li a {
     padding: 20px;
     background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(250,244,149);
+    box-shadow: 0 4px 8px rgb(52, 51, 49);
 }
 
 canvas {

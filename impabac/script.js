@@ -126,15 +126,6 @@ const config3 = {
     data: data3,
     options: {
         responsive: true,
-        animations: {
-            tension: {
-                duration: 1000,
-                easing: 'linear',
-                from: 1,
-                to: 0,
-                loop: true
-            }
-        },
         scales: {
             y: {
                 min: 0,
