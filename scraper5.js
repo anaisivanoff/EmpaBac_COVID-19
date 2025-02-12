@@ -26,7 +26,7 @@ const fs = require('fs'); // Ajoute le module fs pour écrire dans un fichier
     };
 
     // 6. Sauvegarder les données dans un fichier JSON
-    fs.writeFileSync('data6.json', JSON.stringify(data, null, 2), 'utf-8');
+    fs.writeFileSync('data5.json', JSON.stringify(data, null, 2), 'utf-8');
     console.log("Les données ont été sauvegardées dans 'data6.json'");
   } else {
     console.log("Aucune donnée extraite.");
