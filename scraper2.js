@@ -13,6 +13,6 @@ const puppeteer = require('puppeteer');
   });
   console.log("Taux de réussite au bac :évolution, résultats, mentions :", title);
   // 5. Fermer le navigateur
-  +
+  
   await browser.close();
 })();
