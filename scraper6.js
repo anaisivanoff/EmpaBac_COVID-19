@@ -16,7 +16,6 @@ const fs = require('fs');
 
     return extractedText;
   });
-
   const jsonData = {
     extractedText: data,
     url: 'https://www.studyrama.com/revision-examen/bac/premiers-chiffres-resultats-bac-2023',
