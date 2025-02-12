@@ -170,3 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
         statistiquesSection.scrollIntoView({ behavior: "smooth" });
     });
 });
+document.addEventListener("DOMContentLoaded", function() {
+    document.body.classList.add("loaded");
+});
+
