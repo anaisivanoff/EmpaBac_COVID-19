@@ -21,6 +21,7 @@ const fs = require('fs'); // Module pour écrire dans un fichier
     }
     return null; // Si le texte n'est pas trouvé
   });
+<<<<<<< HEAD
   // 5. Vérifier si le texte a été trouvé et sauvegarder
   if (specificText) {
     const data = {
@@ -35,5 +36,10 @@ const fs = require('fs'); // Module pour écrire dans un fichier
     console.log("Le texte spécifique n'a pas été trouvé.");
   }
   // 6. Fermer le navigateur
+=======
+  console.log("Taux de réussite au bac :évolution, résultats, mentions :", title);
+  // 5. Fermer le navigateur
+  
+>>>>>>> 7766fdf551702d6388b29ecb8cff9c92888693f2
   await browser.close();
 })();
