@@ -22,7 +22,7 @@ const fs = require('fs');
     extractedAt: new Date().toISOString()
   };
 
-  fs.writeFileSync('data7.json', JSON.stringify(jsonData, null, 2), 'utf-8');
+  fs.writeFileSync('data6.json', JSON.stringify(jsonData, null, 2), 'utf-8');
   console.log('Data saved to data7.json');
 
   await browser.close();
