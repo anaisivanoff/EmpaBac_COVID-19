@@ -7,7 +7,7 @@ const fs = require('fs'); // Ajoute le module fs pour écrire dans un fichier
   const page = await browser.newPage();
 
   // 2. Aller sur le site cible
-  await page.goto('https://etudiant.lefigaro.fr/article/bac-2022-un-taux-de-reussite-en-baisse_f4cd52d6-ff99-11ec-9d0f-12f873f0defe/', { waitUntil: 'domcontentloaded' });
+  await page.goto('https://www.studyrama.com/revision-examen/bac/actualite/bac-2022-le-taux-de-reussite-atteint-91-1-apres-le-109729', { waitUntil: 'domcontentloaded' });
 
   // 3. Attendre que la page soit chargée complètement
   await page.waitForSelector('html'); // Attendre l'élément principal
@@ -21,13 +21,13 @@ const fs = require('fs'); // Ajoute le module fs pour écrire dans un fichier
   if (title) {
     const data = {
       extractedText: title,
-      url: 'https://etudiant.lefigaro.fr/article/bac-2022-un-taux-de-reussite-en-baisse_f4cd52d6-ff99-11ec-9d0f-12f873f0defe/',
+      url: 'https://www.studyrama.com/revision-examen/bac/actualite/bac-2022-le-taux-de-reussite-atteint-91-1-apres-le-109729',
       extractedAt: new Date().toISOString()
     };
 
     // 6. Sauvegarder les données dans un fichier JSON
     fs.writeFileSync('data5.json', JSON.stringify(data, null, 2), 'utf-8');
-    console.log("Les données ont été sauvegardées dans 'data6.json'");
+    console.log("Les données ont été sauvegardées dans 'data5.json'");
   } else {
     console.log("Aucune donnée extraite.");
   }
