@@ -1,60 +1,49 @@
 const fs = require('fs');
 
-// Fichiers d'entrée et de sortie
-const inputFile = 'data.json';
-const outputFile = 'resultats.json';
+// Charger les données depuis le fichier `data.json`
+const rawData = fs.readFileSync('data.json', 'utf8');
+const scrapedData = JSON.parse(rawData);
 
-// Regex pour extraire les données
-const regexTauxGlobal = /taux de réussite atteint\s+(\d+(?:[.,]\d+)?)%/i;
-const regexCandidats = /([\d\s]+)\s+candidats/i;
-const regexBacheliers = /([\d\s]+)\s+bacheliers/i;
-const regexTauxGeneral = /(\d+(?:[.,]\d+)?)%\s+en\s+général/i;
-const regexTauxTechnologique = /(\d+(?:[.,]\d+)?)%\s+en\s+technologique/i;
-const regexTauxProfessionnel = /(\d+(?:[.,]\d+)?)%\s+en\s+professionnel/i;
+// Fonction de nettoyage des données
+function nettoyerDonnees(extractedText) {
+  // Expressions régulières pour extraire les informations spécifiques
+  const regexCandidats = /Avec (\d{1,3}(?: \d{3})*) candidats/;
+  const regexBacheliers = /(\d{1,3}(?: \d{3})*) bacheliers/;
+  const regexTauxReussiteGlobal = /taux de réussite atteint (\d+,\d+)/;
+  const regexTauxGeneral = /(\d+,\d+) % en général/;
+  const regexTauxTechnologique = /(\d+,\d+) % en technologique/;
+  const regexTauxProfessionnel = /(\d+,\d+) % en professionnel/;
 
-// Lire le fichier JSON brut
-fs.readFile(inputFile, 'utf-8', (err, data) => {
-  if (err) {
-    console.error("Erreur lors de la lecture du fichier JSON :", err);
-    return;
-  }
+  // Extraction des données à l'aide des expressions régulières
+  const nombreCandidatsMatch = extractedText.match(regexCandidats);
+  const nombreBacheliersMatch = extractedText.match(regexBacheliers);
+  const tauxReussiteGlobalMatch = extractedText.match(regexTauxReussiteGlobal);
+  const tauxGeneralMatch = extractedText.match(regexTauxGeneral);
+  const tauxTechnologiqueMatch = extractedText.match(regexTauxTechnologique);
+  const tauxProfessionnelMatch = extractedText.match(regexTauxProfessionnel);
 
-  try {
-    // Convertir le JSON brut en objet JavaScript
-    let rawData = JSON.parse(data);
-
-    if (!rawData.extractedText) {
-      console.error("Erreur : Le fichier JSON ne contient pas 'extractedText'");
-      return;
+  // Nettoyer et convertir les valeurs extraites
+  const cleanedData = {
+    nombreCandidats: nombreCandidatsMatch ? parseInt(nombreCandidatsMatch[1].replace(/ /g, ''), 10) : null,
+    nombreBacheliers: nombreBacheliersMatch ? parseInt(nombreBacheliersMatch[1].replace(/ /g, ''), 10) : null,
+    tauxReussite: {
+      global: tauxReussiteGlobalMatch ? parseFloat(tauxReussiteGlobalMatch[1].replace(',', '.')) : null,
+      general: tauxGeneralMatch ? parseFloat(tauxGeneralMatch[1].replace(',', '.')) : null,
+      technologique: tauxTechnologiqueMatch ? parseFloat(tauxTechnologiqueMatch[1].replace(',', '.')) : null,
+      professionnel: tauxProfessionnelMatch ? parseFloat(tauxProfessionnelMatch[1].replace(',', '.')) : null,
     }
+  };
 
-    let extractedText = rawData.extractedText.trim();
+  return cleanedData;
+}
 
-    // Extraction des données
-    let tauxGlobalMatch = extractedText.match(regexTauxGlobal);
-    let candidatsMatch = extractedText.match(regexCandidats);
-    let bacheliersMatch = extractedText.match(regexBacheliers);
-    let tauxGeneralMatch = extractedText.match(regexTauxGeneral);
-    let tauxTechnologiqueMatch = extractedText.match(regexTauxTechnologique);
-    let tauxProfessionnelMatch = extractedText.match(regexTauxProfessionnel);
+// Vérifier si le fichier `data.json` existe et procéder au nettoyage
+if (scrapedData && scrapedData.extractedText) {
+  const cleanedData = nettoyerDonnees(scrapedData.extractedText);
 
-    // Fonction pour convertir les nombres avec espaces
-    const parseNumber = (num) => parseInt(num.replace(/\s+/g, ''), 10);
-
-    let cleanedData = {
-      taux_reussite_global: tauxGlobalMatch ? parseFloat(tauxGlobalMatch[1].replace(',', '.')) : null,
-      nombre_candidats: candidatsMatch ? parseNumber(candidatsMatch[1]) : null,
-      nombre_bacheliers: bacheliersMatch ? parseNumber(bacheliersMatch[1]) : null,
-      taux_reussite_general: tauxGeneralMatch ? parseFloat(tauxGeneralMatch[1].replace(',', '.')) : null,
-      taux_reussite_technologique: tauxTechnologiqueMatch ? parseFloat(tauxTechnologiqueMatch[1].replace(',', '.')) : null,
-      taux_reussite_professionnel: tauxProfessionnelMatch ? parseFloat(tauxProfessionnelMatch[1].replace(',', '.')) : null
-    };
-
-    // Sauvegarde des données nettoyées
-    fs.writeFileSync(outputFile, JSON.stringify(cleanedData, null, 2), 'utf-8');
-    console.log(`Nettoyage terminé et sauvegardé dans '${outputFile}'`);
-
-  } catch (error) {
-    console.error("Erreur lors du traitement du JSON :", error);
-  }
-});
+  // Sauvegarder les données nettoyées dans un fichier `donnees.json`
+  fs.writeFileSync('donnees.json', JSON.stringify(cleanedData, null, 2), 'utf8');
+  console.log("Les données nettoyées ont été sauvegardées dans 'donnees.json'");
+} else {
+  console.log("Aucune donnée extraite dans 'data.json'");
+}
