@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-// Fichier d'entrée (JSON brut contenant les paragraphes)
+// Fichier d'entrée (JSON brut contenant le texte)
 const inputFile = 'data.json';
 const outputFile = 'resultats.json';
 
@@ -23,23 +23,28 @@ fs.readFile(inputFile, 'utf-8', (err, data) => {
       return;
     }
 
-    let extractedText = rawData.extractedText;
+    let extractedText = rawData.extractedText.trim();
 
     // Appliquer la regex pour extraire les informations
-    let match = regex.exec(extractedText);
-    if (match) {
-      let tauxReussite = parseFloat(match[1].replace(',', '.'));
-      let annee = parseInt(match[2]);
+    const regex = /(\d{4}).*?(?:(\d+(?:[.,]\d+)?)%.*?(général|technologique|professionnel|total|global))+/gi;
+    let matches = [...extractedText.matchAll(regex)];
 
-      let cleanedData = { annee, taux_reussite: tauxReussite };
-
-      // Sauvegarder les données propres en JSON
-      fs.writeFileSync(outputFile, JSON.stringify(cleanedData, null, 2), 'utf-8');
-      console.log("Nettoyage terminé et sauvergardé dans 'cleaned_data.json'");
-    } else {
+    if (matches.length === 0) {
       console.log("Aucune donnée valide trouvée");
+      return;
     }
+
+    let cleanedData = matches.map(match => ({
+      annee: parseInt(match[1]),
+      taux_reussite: parseFloat(match[2].replace(',', '.')),
+      categorie: match[3] || "global"
+    }));
+ 
+    // Sauvegarder les données nettoyées en JSON
+    fs.writeFileSync(resultOutputFile, JSON.stringify(cleanedData, null, 2), 'utf-8');
+    console.log(`Nettoyage terminé et sauvegardé dans '${resultOutputFile}'`);
+ 
   } catch (error) {
-    console.error("Erreur du traitement du JSON", error);
+    console.error("Erreur lors du traitement du JSON :", error);
   }
 });
