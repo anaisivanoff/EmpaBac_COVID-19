@@ -49,7 +49,7 @@ const config = {
         plugins: {
             title: {
                 display: true,
-                text: 'Évolution des taux de mentions (%) au baccalauréat (2018-2024)', //titre
+                text: 'Évolution des taux de mentions (%) au baccalauréat (2018-2024)',
                 font: {
                     size: 18,
                     weight: 'bold'
@@ -58,7 +58,7 @@ const config = {
                     top: 10,
                     bottom: 20
                 },
-                align: 'center' 
+                align: 'center'
             }
         },
         scales: {
@@ -118,7 +118,7 @@ const config2 = {
                     top: 10,
                     bottom: 20
                 },
-                align: 'center' 
+                align: 'center'
             }
         },
         scales: {
@@ -149,6 +149,13 @@ const data3 = {
             fill: false,
             borderColor: 'rgb(255, 206, 86)',
             tension: 0.1
+        },
+        {
+            label: 'Taux de mention Bien (%)', // Nouvelle courbe ajoutée
+            data: [10, 12, 19, 27, 20, 45, 78],
+            fill: false,
+            borderColor: 'rgb(54, 162, 235)', // Bleu
+            tension: 0.1
         }
     ]
 };
@@ -161,7 +168,7 @@ const config3 = {
         plugins: {
             title: {
                 display: true,
-                text: 'Taux de réussite général et mention Assez Bien (%)',
+                text: 'Taux de réussite général, mention Assez Bien et mention Bien (%)',
                 font: {
                     size: 18,
                     weight: 'bold'

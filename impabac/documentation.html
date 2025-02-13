@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documentation</title>
     <link rel="stylesheet" href="css/style.css"> 
+    <style>
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline; 
+        }
+    </style>
 </head>
 <body>
     <div id="particles-js"></div>
@@ -15,38 +24,31 @@
     <main>
         <section class="content-section">
             <h2>Comment avons-nous obtenu les données ?</h2>
-            <p>Nous avons utilisé un script de <strong>web scraping</strong> pour extraire les données de <a href="https://www.data.gouv.fr" target="_blank">data.gouv.fr</a>.</p>
+            <p>Nous avons utilisé un script de <strong>web scraping</strong> pour extraire les données des sources suivantes :</p>
+            <ul>
+                <li><a href="https://archives-statistiques-depp.education.gouv.fr/Default/doc/SYRACUSE/44034/resultats-definitifs-de-la-session-2018-du-baccalaureat-l-effectif-de-bacheliers-poursuit-sa-progres?_lg=fr-FR" target="_blank">Résultats Bac 2018 - Ministère de l'Éducation</a></li>
+                <li><a href="https://groupe-reussite.fr/ressources/blog/evolution-taux-reussite-bac/" target="_blank">Résultats Bac 2019 - Groupe Réussite</a></li>
+                <li><a href="https://www.studyrama.com/revision-examen/bac/actualite/bac-2020-les-chiffres-definitifs-108549" target="_blank">Résultats Bac 2020 - Studyrama</a></li>
+                <li><a href="https://www.studyrama.com/revision-examen/bac/resultats-du-bac/bac-2021-les-resultats-provisoires-108636#:~:text=R%C3%A9sultats%20Bac%202021%20%3A%2093.8%25%20de%20r%C3%A9ussite%20avant%20la%20session%20de%20rattrapage" target="_blank">Résultats Bac 2021 - Studyrama</a></li>
+                <li><a href="https://www.studyrama.com/revision-examen/bac/actualite/bac-2022-le-taux-de-reussite-atteint-91-1-apres-le-109729" target="_blank">Résultats Bac 2022 - Studyrama</a></li>
+                <li><a href="https://www.studyrama.com/revision-examen/bac/premiers-chiffres-resultats-bac-2023" target="_blank">Résultats Bac 2023 - Studyrama</a></li>
+                <li><a href="https://www.letudiant.fr/bac/bac-2024-le-taux-de-reussite-atteint-91-4.html" target="_blank">Résultats Bac 2024 - L'Étudiant</a></li>
+            </ul>
             <p>Les données concernent les taux de réussite du Bac avant et après le Covid.</p>
             <p>Nous avons utilisé les technologies suivantes :</p>
             <ul>
-                <li><strong>Python & BeautifulSoup :</strong> pour extraire les données.</li>
-                <li><strong>Pandas :</strong> pour structurer les données.</li>
+                <li><strong>Puppeteer :</strong> pour automatiser la récupération des données.</li>
                 <li><strong>Chart.js :</strong> pour visualiser les statistiques.</li>
+                <li><strong>Html/Css :</strong> pour la partie visuel.</li>
             </ul>
         </section>
-        
-        <section class="content-section">
-            <h2>Exemple de code de scraping</h2>
-            <pre>
-import requests
-from bs4 import BeautifulSoup
-
-url = "https://www.data.gouv.fr"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
-
-# Extraction des données (exemple)
-titles = soup.find_all("h2")
-for title in titles:
-    print(title.text)
-            </pre>
+        <section class="content-section centered-section">
+            <h2>Répartition des tâches</h2>
+            <li><strong>Anaïs</strong>, en tant que chef de projet, et <strong>Harini</strong> se sont chargées du <strong>scraping</strong> des données.</li>
+            <li><strong>Boundiou</strong> et <strong>Enzo</strong> ont travaillé sur le <strong>nettoyage des données</strong> et l'<strong>analyse des tendances</strong>.</li>
+            <li><strong>Sofia</strong> a pris en charge la <strong>mise en page en HTML et CSS</strong>, où l'on retrouve les graphiques affichant les données correctes.</li>
         </section>
     </main>
-
-    <footer>
-        <p>&copy; 2024 Impact du Bac - Tous droits réservés.</p>
-    </footer>
-
     <script src="js/particles.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/app.js"></script>
