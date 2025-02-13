@@ -23,6 +23,8 @@ header {
     width: 100%;
     text-align: center;
     margin-top: 20px;
+    font-family: "Exo 2", serif;
+    font-optical-sizing: auto;
 }
 header h1 {
     font-size: 3rem;
