@@ -1,11 +1,14 @@
 const fs = require('fs');
 
-// Fichier d'entrée (JSON brut contenant le texte)
+// Fichiers d'entrée et de sortie
 const inputFile = 'data.json';
 const outputFile = 'resultats.json';
 
-// Regex pour capturer (année, académie, taux de réussite)
-const regex = /(\d{4}).*?\b(académie de ([A-Za-zÀ-ÿ-]+)).*?(\d+(?:\.\d+)?)%/g;
+// Regex pour extraire les différentes données
+const regexTauxGlobal = /taux de réussite atteint\s+(\d+(?:[.,]\d+)?)%/i;
+const regexCandidats = /(\d{1,3}(?:[.,]\d{3})*)\s+candidats/i;
+const regexBacheliers = /(\d{1,3}(?:[.,]\d{3})*)\s+bacheliers/i;
+const regexTauxFiliere = /(\d+(?:[.,]\d+)?)%\s+en\s+(général|technologique|professionnel)/gi;
 
 // Lire le fichier JSON brut
 fs.readFile(inputFile, 'utf-8', (err, data) => {
@@ -19,31 +22,35 @@ fs.readFile(inputFile, 'utf-8', (err, data) => {
     let rawData = JSON.parse(data);
 
     if (!rawData.extractedText) {
-      console.error("Le fichier JSON doit contenir un tableau de paragraphes !");
+      console.error("Erreur : le fichier JSON ne contient pas 'extractedText'");
       return;
     }
 
     let extractedText = rawData.extractedText.trim();
 
-    // Appliquer la regex pour extraire les informations
-    const regex = /(\d{4}).*?(?:(\d+(?:[.,]\d+)?)%.*?(général|technologique|professionnel|total|global))+/gi;
-    let matches = [...extractedText.matchAll(regex)];
+    // Extraction des données
+    let tauxGlobal = extractedText.match(regexTauxGlobal);
+    let candidats = extractedText.match(regexCandidats);
+    let bacheliers = extractedText.match(regexBacheliers);
+    let tauxFiliereMatches = [...extractedText.matchAll(regexTauxFiliere)];
 
-    if (matches.length === 0) {
-      console.log("Aucune donnée valide trouvée");
-      return;
-    }
+    // Création de l'objet final
+    let cleanedData = {
+      taux_reussite_global: tauxGlobal ? parseFloat(tauxGlobal[1].replace(',', '.')) : null,
+      nombre_candidats: candidats ? parseInt(candidats[1].replace(/[.,]/g, '')) : null,
+      nombre_bacheliers: bacheliers ? parseInt(bacheliers[1].replace(/[.,]/g, '')) : null,
+      taux_par_filiere: {}
+    };
 
-    let cleanedData = matches.map(match => ({
-      annee: parseInt(match[1]),
-      taux_reussite: parseFloat(match[2].replace(',', '.')),
-      categorie: match[3] || "global"
-    }));
- 
-    // Sauvegarder les données nettoyées en JSON
-    fs.writeFileSync(resultOutputFile, JSON.stringify(cleanedData, null, 2), 'utf-8');
-    console.log(`Nettoyage terminé et sauvegardé dans '${resultOutputFile}'`);
- 
+    // Ajouter les taux de réussite par filière
+    tauxFiliereMatches.forEach(match => {
+      cleanedData.taux_par_filiere[match[2].toLowerCase()] = parseFloat(match[1].replace(',', '.'));
+    });
+
+    // Sauvegarde des données nettoyées
+    fs.writeFileSync(outputFile, JSON.stringify(cleanedData, null, 2), 'utf-8');
+    console.log(`Nettoyage terminé et sauvegardé dans '${outputFile}'`);
+
   } catch (error) {
     console.error("Erreur lors du traitement du JSON :", error);
   }
