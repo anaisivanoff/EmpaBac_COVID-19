@@ -1,9 +1,9 @@
 const fs = require('fs');
 
 /* 
- * 📌 Fonction qui calcule la moyenne des taux de réussite
- * 🔹 Elle parcourt les fichiers JSON pour extraire les taux de réussite globaux.
- * 🔹 Elle calcule la moyenne sur toutes les années disponibles.
+ * Fonction qui calcule la moyenne des taux de réussite
+ * Elle parcourt les fichiers JSON pour extraire les taux de réussite globaux.
+ * Elle calcule la moyenne sur toutes les années disponibles.
  */
 
 function calculerMoyenneTauxReussite() {
@@ -46,8 +46,8 @@ function calculerMoyenneTauxReussite() {
 calculerMoyenneTauxReussite();
 
 /* 
- * 📌 Fonction qui analyse l’évolution des taux de réussite 
- * 🔹 Compare chaque année avec l'année précédente et affiche la variation.
+ *  Fonction qui analyse l’évolution des taux de réussite 
+ *  Compare chaque année avec l'année précédente et affiche la variation.
  */
 
 function calculerEvolutionTauxReussite(tauxParAnnee) {
@@ -68,7 +68,7 @@ function calculerEvolutionTauxReussite(tauxParAnnee) {
     }
 }
 
-// ✅  Exemple d'utilisation avec des taux fictifs (remplacera les vraies données)
+// Exemple d'utilisation avec des taux fictifs (remplacera les vraies données)
 const tauxDeReussite = {
     "2018": 88.2,
     "2019": 87.4,
@@ -77,20 +77,20 @@ const tauxDeReussite = {
     "2022": 92.1
 };
 
-// ✅ Lancer l'analyse d'évolution des taux de réussite 
+// Lancer l'analyse d'évolution des taux de réussite 
 calculerEvolutionTauxReussite(tauxDeReussite);
 
 /* 
- * 📌 Fonction qui analyse la répartition des mentions obtenues au Bac
- * 🔹 Affiche le nombre d’élèves ayant obtenu chaque mention par année.
+ * Fonction qui analyse la répartition des mentions obtenues au Bac
+ * Affiche le nombre d’élèves ayant obtenu chaque mention par année.
  */
 
 function analyserRepartitionMentions(mentionsParAnnee) {
-    console.log("\n🏅 Répartition des mentions par année :");
+    console.log("\n Répartition des mentions par année :");
 
     let annees = Object.keys(mentionsParAnnee);
     annees.forEach(annee => {
-        console.log(`\n📆 Année ${annee}`);
+        console.log(`\n Année ${annee}`);
         let mentions = mentionsParAnnee[annee];
 
         Object.keys(mentions).forEach(mention => {
@@ -99,7 +99,7 @@ function analyserRepartitionMentions(mentionsParAnnee) {
     });
 }
 
-// ✅Exemple des mentions fitcives fictives (remplacera les vraies plus tard)
+// Exemple des mentions fitcives fictives (remplacera les vraies plus tard)
 const mentions = {
     "2018": { "Très Bien": 50000, "Bien": 120000, "Assez Bien": 200000, "Passable": 300000 },
     "2019": { "Très Bien": 52000, "Bien": 118000, "Assez Bien": 205000, "Passable": 290000 },
@@ -108,5 +108,5 @@ const mentions = {
     "2022": { "Très Bien": 65000, "Bien": 130000, "Assez Bien": 215000, "Passable": 270000 }
 };
 
-// ✅ Lancer l'analyse des mentions
+// Lancer l'analyse des mentions
 analyserRepartitionMentions(mentions);
