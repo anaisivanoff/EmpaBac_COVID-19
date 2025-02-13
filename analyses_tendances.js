@@ -40,4 +40,32 @@ function calculerMoyenneTauxReussite() {
 // Lancer l'analyse
 calculerMoyenneTauxReussite();
 
+function calculerEvolutionTauxReussite(tauxParAnnee) {
+    console.log("\n📊 Évolution du taux de réussite par rapport à l'année précédente :");
+    
+    let annees = Object.keys(tauxParAnnee);
+    for (let i = 1; i < annees.length; i++) {
+        let anneePrecedente = annees[i - 1];
+        let anneeActuelle = annees[i];
 
+        let tauxPrecedent = tauxParAnnee[anneePrecedente];
+        let tauxActuel = tauxParAnnee[anneeActuelle];
+
+        let variation = (tauxActuel - tauxPrecedent).toFixed(2);
+        let symbole = variation >= 0 ? "📈 +" : "📉 ";
+
+        console.log(`${anneeActuelle} : ${symbole}${variation}% (par rapport à ${anneePrecedente})`);
+    }
+}
+
+// Exemple d'utilisation avec des taux fictifs (remplacera les vraies données)
+const tauxDeReussite = {
+    "2018": 88.2,
+    "2019": 87.4,
+    "2020": 95.7,
+    "2021": 93.2,
+    "2022": 92.1
+};
+
+// Lancer l'analyse d'évolution
+calculerEvolutionTauxReussite(tauxDeReussite);
