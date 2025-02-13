@@ -69,3 +69,29 @@ const tauxDeReussite = {
 
 // Lancer l'analyse d'évolution
 calculerEvolutionTauxReussite(tauxDeReussite);
+
+function analyserRepartitionMentions(mentionsParAnnee) {
+    console.log("\n🏅 Répartition des mentions par année :");
+
+    let annees = Object.keys(mentionsParAnnee);
+    annees.forEach(annee => {
+        console.log(`\n📆 Année ${annee}`);
+        let mentions = mentionsParAnnee[annee];
+
+        Object.keys(mentions).forEach(mention => {
+            console.log(`   🏆 ${mention} : ${mentions[mention]} élèves`);
+        });
+    });
+}
+
+// Exemple de données fictives (remplacera les vraies données d'Enzo plus tard)
+const mentions = {
+    "2018": { "Très Bien": 50000, "Bien": 120000, "Assez Bien": 200000, "Passable": 300000 },
+    "2019": { "Très Bien": 52000, "Bien": 118000, "Assez Bien": 205000, "Passable": 290000 },
+    "2020": { "Très Bien": 70000, "Bien": 150000, "Assez Bien": 220000, "Passable": 250000 },
+    "2021": { "Très Bien": 68000, "Bien": 140000, "Assez Bien": 210000, "Passable": 260000 },
+    "2022": { "Très Bien": 65000, "Bien": 130000, "Assez Bien": 215000, "Passable": 270000 }
+};
+
+// Lancer l'analyse des mentions
+analyserRepartitionMentions(mentions);
