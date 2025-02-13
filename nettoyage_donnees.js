@@ -4,10 +4,10 @@ const fs = require('fs');
 const inputFile = 'data.json';
 const outputFile = 'resultats.json';
 
-// Regex pour extraire les différentes données
+// Regex améliorées pour capturer correctement les données
 const regexTauxGlobal = /taux de réussite atteint\s+(\d+(?:[.,]\d+)?)%/i;
-const regexCandidats = /(\d{1,3}(?:[.,]\d{3})*)\s+candidats/i;
-const regexBacheliers = /(\d{1,3}(?:[.,]\d{3})*)\s+bacheliers/i;
+const regexCandidats = /([\d\s]+)\s+candidats/i;
+const regexBacheliers = /([\d\s]+)\s+bacheliers/i;
 const regexTauxFiliere = /(\d+(?:[.,]\d+)?)%\s+en\s+(général|technologique|professionnel)/gi;
 
 // Lire le fichier JSON brut
@@ -22,7 +22,7 @@ fs.readFile(inputFile, 'utf-8', (err, data) => {
     let rawData = JSON.parse(data);
 
     if (!rawData.extractedText) {
-      console.error("Erreur : le fichier JSON ne contient pas 'extractedText'");
+      console.error("Erreur : Le fichier JSON ne contient pas 'extractedText'");
       return;
     }
 
@@ -34,11 +34,13 @@ fs.readFile(inputFile, 'utf-8', (err, data) => {
     let bacheliers = extractedText.match(regexBacheliers);
     let tauxFiliereMatches = [...extractedText.matchAll(regexTauxFiliere)];
 
-    // Création de l'objet final
+    // Correction des nombres en supprimant les espaces et en convertissant en int
+    const parseNumber = (num) => parseInt(num.replace(/\s+/g, ''), 10);
+
     let cleanedData = {
       taux_reussite_global: tauxGlobal ? parseFloat(tauxGlobal[1].replace(',', '.')) : null,
-      nombre_candidats: candidats ? parseInt(candidats[1].replace(/[.,]/g, '')) : null,
-      nombre_bacheliers: bacheliers ? parseInt(bacheliers[1].replace(/[.,]/g, '')) : null,
+      nombre_candidats: candidats ? parseNumber(candidats[1]) : null,
+      nombre_bacheliers: bacheliers ? parseNumber(bacheliers[1]) : null,
       taux_par_filiere: {}
     };
 
