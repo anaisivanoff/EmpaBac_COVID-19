@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation</title>
+    <link rel="stylesheet" href="css/style.css"> 
+</head>
+<body>
+    <div id="particles-js"></div>
+    <header>
+        <h1>Documentation du Projet</h1>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <h2>Comment avons-nous obtenu les données ?</h2>
+            <p>Nous avons utilisé un script de <strong>web scraping</strong> pour extraire les données de <a href="https://www.data.gouv.fr" target="_blank">data.gouv.fr</a>.</p>
+            <p>Les données concernent les taux de réussite du Bac avant et après le Covid.</p>
+            <p>Nous avons utilisé les technologies suivantes :</p>
+            <ul>
+                <li><strong>Python & BeautifulSoup :</strong> pour extraire les données.</li>
+                <li><strong>Pandas :</strong> pour structurer les données.</li>
+                <li><strong>Chart.js :</strong> pour visualiser les statistiques.</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>Exemple de code de scraping</h2>
+            <pre>
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://www.data.gouv.fr"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "html.parser")
+
+# Extraction des données (exemple)
+titles = soup.find_all("h2")
+for title in titles:
+    print(title.text)
+            </pre>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Impact du Bac - Tous droits réservés.</p>
+    </footer>
+
+    <script src="js/particles.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
