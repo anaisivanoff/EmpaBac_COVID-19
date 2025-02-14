@@ -13,10 +13,7 @@
     "nombreCandidats": null,
     "nombreBacheliers": null,
     "tauxReussite": {
-      "global": null,
-      "general": null,
-      "technologique": 16.4,
-      "professionnel": null
+      "global": null
     }
   },
   "2020": {
@@ -24,9 +21,9 @@
     "nombreBacheliers": null,
     "tauxReussite": {
       "global": null,
-      "general": null,
-      "technologique": null,
-      "professionnel": null
+      "general": 97.6,
+      "technologique": 90.4,
+      "professionnel": 90.4
     }
   },
   "2021": {
@@ -44,9 +41,9 @@
     "nombreBacheliers": null,
     "tauxReussite": {
       "global": 91.1,
-      "general": null,
-      "technologique": null,
-      "professionnel": null
+      "general": 96.1,
+      "technologique": 3.5,
+      "professionnel": 82.3
     }
   },
   "2023": {
@@ -54,9 +51,9 @@
     "nombreBacheliers": null,
     "tauxReussite": {
       "global": 90.9,
-      "general": null,
-      "technologique": null,
-      "professionnel": null
+      "general": 95.7,
+      "technologique": 89.8,
+      "professionnel": 82.7
     }
   },
   "2024": {
@@ -64,9 +61,9 @@
     "nombreBacheliers": null,
     "tauxReussite": {
       "global": 91.4,
-      "general": null,
-      "technologique": null,
-      "professionnel": null
+      "general": 95.7,
+      "technologique": 83.4,
+      "professionnel": 42.9
     }
   }
 }
