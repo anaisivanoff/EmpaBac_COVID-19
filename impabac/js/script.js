@@ -46,6 +46,21 @@ const config = {
                 loop: true
             }
         },
+        plugins: {
+            title: {
+                display: true,
+                text: 'Évolution des taux de mentions (%) au baccalauréat (2018-2024)',
+                font: {
+                    size: 18,
+                    weight: 'bold'
+                },
+                padding: {
+                    top: 10,
+                    bottom: 20
+                },
+                align: 'center'
+            }
+        },
         scales: {
             y: {
                 min: 0,
@@ -54,6 +69,7 @@ const config = {
         }
     }
 };
+
 const ctx = document.getElementById('bacChart').getContext('2d');
 new Chart(ctx, config);
 
@@ -90,6 +106,21 @@ const config2 = {
     data: data2,
     options: {
         responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Nombre total de candidats au baccalauréat (2018-2024)',
+                font: {
+                    size: 18,
+                    weight: 'bold'
+                },
+                padding: {
+                    top: 10,
+                    bottom: 20
+                },
+                align: 'center'
+            }
+        },
         scales: {
             y: {
                 min: 0,
@@ -98,6 +129,7 @@ const config2 = {
         }
     }
 };
+
 const ctx2 = document.getElementById('secondChart').getContext('2d');
 new Chart(ctx2, config2);
 
@@ -117,6 +149,13 @@ const data3 = {
             fill: false,
             borderColor: 'rgb(255, 206, 86)',
             tension: 0.1
+        },
+        {
+            label: 'Taux de mention Bien (%)', // Nouvelle courbe ajoutée
+            data: [10, 12, 19, 27, 20, 45, 78],
+            fill: false,
+            borderColor: 'rgb(54, 162, 235)', // Bleu
+            tension: 0.1
         }
     ]
 };
@@ -126,6 +165,21 @@ const config3 = {
     data: data3,
     options: {
         responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Taux de réussite général, mention Assez Bien et mention Bien (%)',
+                font: {
+                    size: 18,
+                    weight: 'bold'
+                },
+                padding: {
+                    top: 10,
+                    bottom: 20
+                },
+                align: 'center'
+            }
+        },
         scales: {
             y: {
                 min: 0,
@@ -134,35 +188,14 @@ const config3 = {
         }
     }
 };
+
 const ctx3 = document.getElementById('thirdChart').getContext('2d');
 new Chart(ctx3, config3);
 
-const config1 = {
-    type: 'line',
-    data: data,
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-                labels: {
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                max: 100
-            }
-        }
-    }
-};
 document.addEventListener("DOMContentLoaded", function() {
     document.body.classList.add("loaded");
 });
+
 document.addEventListener("DOMContentLoaded", function() {
     const btnStatistiques = document.getElementById("btn-statistiques");
     if (btnStatistiques) {
@@ -171,5 +204,3 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-
-
