@@ -103,16 +103,19 @@ h3 {
 }
 
 #btn-documentation {
-    background-color: #fffefe;
-    color: rgb(0, 0, 0);
-    padding: 15px 30px;
-    font-size: 18px;
-    border-radius: 8px;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 20px;
-    transition: background 0.3s ease-in-out, transform 0.2s;
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #e0e0e0;
+    color: #0A192F;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
 }
+
 
 #btn-documentation:hover {
     background-color: #555;
@@ -126,4 +129,10 @@ p {
     margin-bottom: 20px;
     font-family: "Exo 2", serif;
     font-optical-sizing: auto;
+}
+.content-section {
+    text-align: left;
+}
+#observations, #repartition-taches {
+    text-align: left;
 }
