@@ -1,60 +1,110 @@
 const fs = require('fs');
 
-// Fichiers d'entrée et de sortie
-const inputFile = 'data.json';
-const outputFile = 'resultats.json';
+const rawData2018 = fs.readFileSync('./data.json/data1.json', 'utf8');
+const rawData2019 = fs.readFileSync('./data.json/data2.json', 'utf8');
+const rawData2020 = fs.readFileSync('./data.json/data3.json', 'utf8');
+const rawData2021 = fs.readFileSync('./data.json/data4.json', 'utf8');
+const rawData2022 = fs.readFileSync('./data.json/data5.json', 'utf8');
+const rawData2023 = fs.readFileSync('./data.json/data6.json', 'utf8');
+const rawData2024 = fs.readFileSync('./data.json/data7.json', 'utf8');
 
-// Regex pour extraire les données
-const regexTauxGlobal = /taux de réussite atteint\s+(\d+(?:[.,]\d+)?)%/i;
-const regexCandidats = /([\d\s]+)\s+candidats/i;
-const regexBacheliers = /([\d\s]+)\s+bacheliers/i;
-const regexTauxGeneral = /(\d+(?:[.,]\d+)?)%\s+en\s+général/i;
-const regexTauxTechnologique = /(\d+(?:[.,]\d+)?)%\s+en\s+technologique/i;
-const regexTauxProfessionnel = /(\d+(?:[.,]\d+)?)%\s+en\s+professionnel/i;
+const scrapedData = {
+    "2018": JSON.parse(rawData2018),
+    "2019": JSON.parse(rawData2019),
+    "2020": JSON.parse(rawData2020),
+    "2021": JSON.parse(rawData2021),
+    "2022": JSON.parse(rawData2022),
+    "2023": JSON.parse(rawData2023),
+    "2024": JSON.parse(rawData2024),
+};
 
-// Lire le fichier JSON brut
-fs.readFile(inputFile, 'utf-8', (err, data) => {
-  if (err) {
-    console.error("Erreur lors de la lecture du fichier JSON :", err);
-    return;
-  }
-
-  try {
-    // Convertir le JSON brut en objet JavaScript
-    let rawData = JSON.parse(data);
-
-    if (!rawData.extractedText) {
-      console.error("Erreur : Le fichier JSON ne contient pas 'extractedText'");
-      return;
+function extraireTauxGeneral(texte) {
+    const mots = texte.split(/\s+/);
+    let resultats = [];
+    for (let i = 0; i < mots.length; i++) {
+        if (mots[i].match(/^\d+,\d+%?$/)) {
+            let nombre = mots[i].replace('%', '');
+            let contexte = mots.slice(Math.max(0, i - 5), i + 6);
+            let cleanedContexte = contexte.join(' ').replace(/[\.,;:()]/g, '');
+            if (cleanedContexte.toLowerCase().includes("général")) {
+                resultats.push(parseFloat(nombre.replace(',', '.')));
+            }
+        }
     }
+    return resultats.length > 0 ? resultats[0] : null;
+}
 
-    let extractedText = rawData.extractedText.trim();
+function extraireTauxTechnologique(texte) {
+  const mots = texte.split(/\s+/);
+  let resultats = [];
+  for (let i = 0; i < mots.length; i++) {
+      if (mots[i].match(/^\d+,\d+%?$/)) {
+          let nombre = mots[i].replace('%', '');
+          let contexte = mots.slice(Math.max(0, i - 5), i + 6);
+          let cleanedContexte = contexte.join(' ').replace(/[\.,;:()]/g, '');
+          if (cleanedContexte.toLowerCase().includes("technologique")) {
+              resultats.push(parseFloat(nombre.replace(',', '.')));
+          }
+      }
+  }
+  return resultats.length > 0 ? resultats[0] : null;
+}
 
-    // Extraction des données
-    let tauxGlobalMatch = extractedText.match(regexTauxGlobal);
-    let candidatsMatch = extractedText.match(regexCandidats);
-    let bacheliersMatch = extractedText.match(regexBacheliers);
-    let tauxGeneralMatch = extractedText.match(regexTauxGeneral);
-    let tauxTechnologiqueMatch = extractedText.match(regexTauxTechnologique);
-    let tauxProfessionnelMatch = extractedText.match(regexTauxProfessionnel);
+function extraireTauxProfessionnel(texte) {
+  const mots = texte.split(/\s+/);
+  let resultats = [];
+  for (let i = 0; i < mots.length; i++) {
+      if (mots[i].match(/^\d+,\d+%?$/)) {
+          let nombre = mots[i].replace('%', '');
+          let contexte = mots.slice(Math.max(0, i - 5), i + 6);
+          let cleanedContexte = contexte.join(' ').replace(/[\.,;:()]/g, '');
+          if (cleanedContexte.toLowerCase().includes("professionnel")) {
+              resultats.push(parseFloat(nombre.replace(',', '.')));
+          }
+      }
+  }
+  return resultats.length > 0 ? resultats[0] : null;
+}
 
-    // Fonction pour convertir les nombres avec espaces
-    const parseNumber = (num) => parseInt(num.replace(/\s+/g, ''), 10);
+function nettoyerDonnees(extractedText, annee) {
+    const regexCandidats = /Avec (\d{1,3}(?: \d{3})*) candidats/;
+    const regexBacheliers = /(\d{1,3}(?: \d{3})*) bacheliers/;
+    const regexTauxReussiteGlobal = /taux de réussite atteint (\d+,\d+)/;
+
+    const nombreCandidatsMatch = extractedText.match(regexCandidats);
+    const nombreBacheliersMatch = extractedText.match(regexBacheliers);
+    const tauxReussiteGlobalMatch = extractedText.match(regexTauxReussiteGlobal);
+    
+    const tauxGeneral = annee === "2019" ? null : extraireTauxGeneral(extractedText);
+    const tauxTechnologique = annee === "2019" ? null : extraireTauxTechnologique(extractedText);
+    const tauxProfessionnel = annee === "2019" ? null : extraireTauxProfessionnel(extractedText);
 
     let cleanedData = {
-      taux_reussite_global: tauxGlobalMatch ? parseFloat(tauxGlobalMatch[1].replace(',', '.')) : null,
-      nombre_candidats: candidatsMatch ? parseNumber(candidatsMatch[1]) : null,
-      nombre_bacheliers: bacheliersMatch ? parseNumber(bacheliersMatch[1]) : null,
-      taux_reussite_general: tauxGeneralMatch ? parseFloat(tauxGeneralMatch[1].replace(',', '.')) : null,
-      taux_reussite_technologique: tauxTechnologiqueMatch ? parseFloat(tauxTechnologiqueMatch[1].replace(',', '.')) : null,
-      taux_reussite_professionnel: tauxProfessionnelMatch ? parseFloat(tauxProfessionnelMatch[1].replace(',', '.')) : null
+        nombreCandidats: nombreCandidatsMatch ? parseInt(nombreCandidatsMatch[1].replace(/ /g, ''), 10) : null,
+        nombreBacheliers: nombreBacheliersMatch ? parseInt(nombreBacheliersMatch[1].replace(/ /g, ''), 10) : null,
+        tauxReussite: {
+            global: tauxReussiteGlobalMatch ? parseFloat(tauxReussiteGlobalMatch[1].replace(',', '.')) : null
+        }
     };
 
-    // Sauvegarde des données nettoyées
-    fs.writeFileSync(outputFile, JSON.stringify(cleanedData, null, 2), 'utf-8');
-    console.log(`Nettoyage terminé et sauvegardé dans '${outputFile}'`);
+    if (annee !== "2019") {
+        cleanedData.tauxReussite.general = tauxGeneral;
+        cleanedData.tauxReussite.technologique = tauxTechnologique;
+        cleanedData.tauxReussite.professionnel = tauxProfessionnel;
+    }
 
-  } catch (error) {
-    console.error("Erreur lors du traitement du JSON :", error);
-  }
-});
+    return cleanedData;
+}
+
+function processData() {
+    let donneesFinales = {};
+
+    for (let annee in scrapedData) {
+        donneesFinales[annee] = nettoyerDonnees(scrapedData[annee].extractedText, annee);
+    }
+
+    fs.writeFileSync('donnees.json', JSON.stringify(donneesFinales, null, 2), 'utf8');
+    console.log("Les données nettoyées ont été sauvegardées dans 'donnees.json'");
+}
+
+processData();

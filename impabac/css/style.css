@@ -11,8 +11,8 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #0c61b6;
-    color: #333;
+    background-color: #002277;
+    color: #ffffff;
     overflow-x: hidden;
     min-height: 100vh;
     display: flex;
@@ -32,7 +32,7 @@ header {
 header h1 {
     font-size: 3rem;
     font-weight: bold;
-    color: white !important;
+    color: rgb(255, 255, 255) !important;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-family: "Exo 2", serif;
@@ -44,9 +44,9 @@ header h1 {
     width: 90%;
     max-width: 900px;
     margin: 40px auto;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(252, 251, 251, 0.182);
     border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgb(255, 255, 255);
     transition: transform 0.3s ease-in-out;
     text-align: center;
 }
@@ -85,10 +85,14 @@ footer {
 h2 {
     font-size: 28px;
     font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
     margin-bottom: 20px;
+    text-align: left; 
     font-family: "Exo 2", serif;
     font-optical-sizing: auto;
 }
+
 
 h3 {
     font-size: 22px;
@@ -99,8 +103,8 @@ h3 {
 }
 
 #btn-documentation {
-    background-color: #333;
-    color: white;
+    background-color: #fffefe;
+    color: rgb(0, 0, 0);
     padding: 15px 30px;
     font-size: 18px;
     border-radius: 8px;
@@ -113,4 +117,13 @@ h3 {
 #btn-documentation:hover {
     background-color: #555;
     transform: scale(1.05);
+}
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #e0e0e0;
+    text-align: left; 
+    margin-bottom: 20px;
+    font-family: "Exo 2", serif;
+    font-optical-sizing: auto;
 }
