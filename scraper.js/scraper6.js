@@ -3,6 +3,7 @@ const fs = require('fs');
 
 (async () => {
   const browser = await puppeteer.launch();
+
   const page = await browser.newPage();
   await page.goto('https://www.studyrama.com/revision-examen/bac/premiers-chiffres-resultats-bac-2023');
 
@@ -17,9 +18,11 @@ const fs = require('fs');
     return extractedText;
   });
   const jsonData = {
+
     extractedText: data,
     url: 'https://www.studyrama.com/revision-examen/bac/premiers-chiffres-resultats-bac-2023',
     extractedAt: new Date().toISOString()
+    
   };
 
   fs.writeFileSync('data6.json', JSON.stringify(jsonData, null, 2), 'utf-8');
