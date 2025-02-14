@@ -29,7 +29,7 @@ for (let i = 1; i < annees.length; i++) {
 console.log("\n Répartition du taux de réussite par filière :");
 Object.keys(data).forEach(annee => {
     console.log(`\n 📆 Année ${annee}`);
-    console.log(` 🧑‍🎓 Général : ${data[annee].tauxReussite.general}%`);
-    console.log(` ⚙️ Technologique : ${data[annee].tauxReussite.technologique}%`);
+    console.log(` 🧑‍🎓  Général : ${data[annee].tauxReussite.general}%`);
+    console.log(` ⚙️  Technologique : ${data[annee].tauxReussite.technologique}%`);
     console.log(` 👩‍💻 Professionnel : ${data[annee].tauxReussite.professionnel}%`);
 });
