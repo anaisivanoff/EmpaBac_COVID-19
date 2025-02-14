@@ -10,45 +10,48 @@
     }
   },
   "2019": {
-    "nombreCandidats": null,
-    "nombreBacheliers": null,
+    "nombreCandidats": 755900,
+    "nombreBacheliers": 665900,
     "tauxReussite": {
-      "global": null
+      "global": 88.1,
+      "serieL": 91.6,
+      "serieS": 91.4,
+      "serieES": 90.7
     }
   },
   "2020": {
-    "nombreCandidats": null,
-    "nombreBacheliers": null,
+    "nombreCandidats": 760800,
+    "nombreBacheliers": 723000,
     "tauxReussite": {
-      "global": null,
+      "global": 95,
       "general": 97.6,
-      "technologique": 90.4,
+      "technologique": 95,
       "professionnel": 90.4
     }
   },
   "2021": {
-    "nombreCandidats": null,
-    "nombreBacheliers": null,
+    "nombreCandidats": 732800,
+    "nombreBacheliers": 687200,
     "tauxReussite": {
-      "global": null,
-      "general": null,
-      "technologique": null,
-      "professionnel": null
+      "global": 93.8,
+      "general": 97.6,
+      "technologique": 94,
+      "professionnel": 86.7
     }
   },
   "2022": {
-    "nombreCandidats": null,
-    "nombreBacheliers": null,
+    "nombreCandidats": 729400,
+    "nombreBacheliers": 664300,
     "tauxReussite": {
       "global": 91.1,
       "general": 96.1,
-      "technologique": 3.5,
+      "technologique": 90.6,
       "professionnel": 82.3
     }
   },
   "2023": {
-    "nombreCandidats": null,
-    "nombreBacheliers": null,
+    "nombreCandidats": 739500,
+    "nombreBacheliers": 672400,
     "tauxReussite": {
       "global": 90.9,
       "general": 95.7,
@@ -57,13 +60,13 @@
     }
   },
   "2024": {
-    "nombreCandidats": null,
-    "nombreBacheliers": null,
+    "nombreCandidats": 778614,
+    "nombreBacheliers": 684157,
     "tauxReussite": {
       "global": 91.4,
-      "general": 95.7,
-      "technologique": 83.4,
-      "professionnel": 42.9
+      "general": 96.1,
+      "technologique": 90.3,
+      "professionnel": 83.4
     }
   }
 }
