@@ -1,5 +1,10 @@
 # YmmersionData
 
+<<<<<<< HEAD
+&& =
+
+https://www.notion.so/Planificateur-de-projet-de-groupe-14b2ede5be8f80a797fcedd4326c1041
+=======
 # EmpaBAC - Analyse des Résultats du Bac
 
 ## Présentation du projet
@@ -38,3 +43,4 @@ Nous avons utilisé **JavaScript et Puppeteer** pour collecter et analyser les d
 **Note importante :**  
 Les données nettoyées et structurées par Enzo ne sont pas encore prêtes au moment de ce commit.  
 Les analyses actuelles sont basées sur des données fictives, mais le code est déjà prêt à être utilisé dès que les fichiers seront finalisés.
+>>>>>>> e6dbfa17fc064470c7cec2b2282ca233cf29a4cb
